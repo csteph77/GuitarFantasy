@@ -1,6 +1,6 @@
-/*--- Step 1 - Defining global variables ---*/
+/*--- Step 1 - Defining global variables; object and functions---*/
 
-var questionsArray = [
+var questions = [
     //Question 1
     {
         questionText: 'When did the predessor to the modern guitar first appear?',
@@ -28,7 +28,7 @@ var questionsArray = [
     //Question 4
     {
         questionText: 'What is the highest recorded price paid for a guitar?',
-        questionChoices: ['$900,000.00', '$1,560,000.00', '$2,700,00.00'],
+        questionChoices: ['$900,000.00', '$1,560,000.00', '$2,700,000.00'],
         questionCorrectChoice: 2,
         correctDetails: 'The guitar that fetched the highest price was auctioned off to raise money for the 2004 Asia Tsunami relief charity.'
     },
@@ -81,3 +81,83 @@ var questionsArray = [
         correctDetails: 'Glenn Haworth changed 183 individual strings in just 60 minutes. '
     }
 ];
+
+
+
+
+/*--- Variables ---*/
+var questionNum = 0;
+var questionTotal = questions.length;
+var correctTotal = 0;
+
+
+//functions
+function displayQuestion() {
+    /*--- Display Questions ---*/
+    $('#prompt').text(questions[questionNum].questionText);
+
+    /*--- Display Answers ---*/
+    $('.answers').empty();
+    var totalNumberOfChoices = questions[questionNum].questionChoices.length;
+    for (var i = 0; i < totalNumberOfChoices; i++) {
+        var buildAnswers = "<input type='radio' class='option' name='option' value=" + i + ">" + questions[questionNum].questionChoices[i] + "<br>";
+        $('.answers').append(buildAnswers);
+    }
+
+    /*--- Display Question Number out of total --- */
+    $('.count').text(questionNum + 1);
+    $('.totalCount').text(questionTotal);
+
+};
+
+//STEP 2 - Use functions and triggers
+/*--- Hide quiz and result section on load ---*/
+$(document).ready(function () {
+
+    $('.quiz-section').hide();
+    $('.results-section').hide();
+
+    /*--- On start quiz ---*/
+
+    $('.startButton').click(function () { //start the quiz and show the first question
+        $('.results-section').hide();
+        $('.intro-section').hide();
+        $('.quiz-section').show();
+        displayQuestion();
+    });
+
+    /*--- After the questions was answered --- */
+
+    $('.quiz-section').on('click', 'option', function () {
+        var userAnswer = $("input[class:'option']:checked").val();
+        var correctAnswer = questions[questionNum].questionCorrectChoice;
+        if (userAnswer == correctAnswer) {
+            correctTotal++;
+        }
+        $('#result_msg').append("<h3>Q: " + questions[questionNum].questionText + "</h3>");
+        $('#result_msg').append("<h4>A: " + questions[questionNum].correctDetails + "</h4>");
+
+        if ((questionNum + 1) == questionTotal) {
+            $('.corretAnswer').text(correctTotal + "/" + questionTotal);
+
+            $('.quiz-section').hide();
+            $('.intro-section').hide();
+            $('.results-section').show();
+        } else {
+            questionNum++;
+            displayQuestion();
+        }
+    });
+
+
+
+
+
+
+    //    questionNum++;
+
+
+
+    /*--- Display results ---*/
+
+});
