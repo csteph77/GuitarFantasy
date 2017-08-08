@@ -128,8 +128,8 @@ $(document).ready(function () {
 
     /*--- After the questions was answered --- */
 
-    $('.quiz-section').on('click', 'option', function () {
-        var userAnswer = $("input[class:'option']:checked").val();
+    $('.quiz-section').on('click', '.option', function () {
+        var userAnswer = $("input[class='option']:checked").val();
         var correctAnswer = questions[questionNum].questionCorrectChoice;
         if (userAnswer == correctAnswer) {
             correctTotal++;
@@ -138,7 +138,7 @@ $(document).ready(function () {
         $('#result_msg').append("<h4>A: " + questions[questionNum].correctDetails + "</h4>");
 
         if ((questionNum + 1) == questionTotal) {
-            $('.corretAnswer').text(correctTotal + "/" + questionTotal);
+            $('.correctAnswer').text(correctTotal + " out of " + questionTotal);
 
             $('.quiz-section').hide();
             $('.intro-section').hide();
@@ -151,7 +151,15 @@ $(document).ready(function () {
 
 
 
-
+    /*--- Load the start section from the result section ---*/
+    $('.results-section').on('click', '.retryButton', function () {
+        $('.intro-section').show();
+        $('.quiz-section').hide();
+        $('.results-section').hide();
+        //reset variables to start quiz again
+        currentQuestionNumber = 0;
+        totalNumberOfCorrectAnswers = 0;
+    });
 
 
     //    questionNum++;
