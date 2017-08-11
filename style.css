@@ -22,7 +22,7 @@
 */
 
 html {
-    background: rgba(0, 0, 0, 0) url("../images/background.jpg") no-repeat center center fixed;
+    background: rgba(0, 0, 0, 0) url("./images/background.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -90,7 +90,7 @@ h1 {
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
-    background: rgba(0, 0, 0, 0) url("../images/transparent.jpg") no-repeat center center fixed;
+    background: rgba(0, 0, 0, 0) url("./images/transparent.jpg") no-repeat center center fixed;
     border-radius: 15px;
 }
 
